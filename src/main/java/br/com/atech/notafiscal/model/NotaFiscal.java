@@ -19,10 +19,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import br.com.atech.mercadoria.model.Mercadoria;
 import br.com.atech.notafiscal.emitente.model.Emitente;
 
 @Entity
+@Where( clause = "ativo = true" )
+@SQLDelete(sql = "update Nota_fiscal set ativo = false where id = ?")
 @Table( name = "NOTA_FISCAL" )
 @SequenceGenerator( sequenceName = "SEQ_NOTA_FISCAL", name = "SEQ_NOTA_FISCAL", allocationSize = 1 )
 public class NotaFiscal implements ObjectConsumer{
@@ -52,6 +57,8 @@ public class NotaFiscal implements ObjectConsumer{
 	
 	@Column( name="nro_nota" )
 	private Integer nroNota;
+	
+	private boolean ativo = true;
 
 	public Long getId() {
 		return id;
@@ -104,5 +111,13 @@ public class NotaFiscal implements ObjectConsumer{
 	@Override
 	public String messageConsumer() {
 		return "Invoice Number "+this.nroNota;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 }

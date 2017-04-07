@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -18,15 +17,13 @@ public class MercadoriaSqlBuilder {
 	private final List<Predicate> predicates;
 	private final FiltroMercadoria request;
 	private final CriteriaBuilder builder;
-	private final Root<MercadoriaMock> root;
-	private final CriteriaQuery<?> query;
+	private final Root<Mercadoria> root;
 	
-	public MercadoriaSqlBuilder(final FiltroMercadoria request, final CriteriaBuilder builder, final Root<MercadoriaMock> root, final CriteriaQuery<?> query) {
+	public MercadoriaSqlBuilder(final FiltroMercadoria request, final CriteriaBuilder builder, final Root<Mercadoria> root) {
 		this.predicates = new ArrayList<Predicate>();
 		this.request = request;
 		this.builder = builder;
 		this.root = root;
-		this.query = query;
 	}
 	
 	

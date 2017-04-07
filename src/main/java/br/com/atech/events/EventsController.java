@@ -1,12 +1,13 @@
 package br.com.atech.events;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,12 +23,12 @@ public class EventsController {
 	
 	@GetMapping( value="/unread" )
     public List<Events> events() throws InterruptedException  {
-		return eventsRepository.findByStatusEvent(StatusEvent.UNREAD);
+		List<Events> listEvents = eventsRepository.findByStatusEvent(StatusEvent.UNREAD);
+		if(CollectionUtils.isNotEmpty(listEvents))
+		{
+			eventsRepository.readEvent(listEvents.stream().map(Events::getId).collect(Collectors.toList()));
+		}
+		return listEvents;
 	}
 	
-	@GetMapping(value = "/read/{id}")
-	public void readEvents( @PathVariable final Long id ) {
-		eventsRepository.readEvent( id );
-	}
-
 }

@@ -1,7 +1,5 @@
 package br.com.atech.notafiscal;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -22,7 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.atech.notafiscal.model.NotaFiscalMock;
+import br.com.atech.AbstractController;
+import br.com.atech.notafiscal.model.NotaFiscal;
 import br.com.atech.notafiscal.model.NotaFiscalRepository;
 import br.com.atech.notafiscal.model.NotaFiscalService;
 import br.com.atech.notafiscal.model.NotaFiscalSpecification;
@@ -30,7 +29,7 @@ import br.com.atech.notafiscal.model.NotaFiscalSpecification;
 @RestController
 @Transactional
 @RequestMapping("/rest/nota-fiscal")
-public class NotaFiscalController {
+public class NotaFiscalController extends AbstractController{
 	
 	
 	@Autowired
@@ -47,16 +46,8 @@ public class NotaFiscalController {
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	public Page<NotaFiscalJson> filter( final FiltroNotaFiscal filtro, final Pageable pageable ) {
-		Page<NotaFiscalMock> pageNota = notaFiscalRepository.findAll(NotaFiscalSpecification.searchNotaFiscal(filtro), pageable);
+		Page<NotaFiscal> pageNota = notaFiscalRepository.findAll(NotaFiscalSpecification.searchNotaFiscal(filtro), pageable);
 		return new PageImpl<NotaFiscalJson>(notaFiscalMapper.fromNotaFiscal(pageNota.getContent()), pageable, pageNota.getTotalElements());
-	}
-
-	
-	
-	@GetMapping
-	public List<NotaFiscalJson> listAll() {
-		List<NotaFiscalMock> pageNota = notaFiscalRepository.findAll();
-		return notaFiscalMapper.fromNotaFiscal(pageNota);
 	}
 
 	@ResponseStatus( value = HttpStatus.CREATED )

@@ -1,4 +1,4 @@
-package br.com.atech;
+package br.com.atech.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

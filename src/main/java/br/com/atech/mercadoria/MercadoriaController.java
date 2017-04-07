@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.atech.AbstractController;
-import br.com.atech.mercadoria.model.MercadoriaMock;
+import br.com.atech.mercadoria.model.Mercadoria;
 import br.com.atech.mercadoria.model.MercadoriaRepository;
 import br.com.atech.mercadoria.model.MercadoriaService;
 import br.com.atech.mercadoria.model.MercadoriaSpecification;
@@ -45,7 +45,7 @@ public class MercadoriaController extends AbstractController{
 	
 	@GetMapping(value = "/filter")
 	public Page<MercadoriaJson> filter( final FiltroMercadoria filtro, final Pageable pageable ) {
-		Page<MercadoriaMock> pageNota = mercadoriaRepository.findAll(MercadoriaSpecification.searchMercadoria(filtro), pageable);
+		Page<Mercadoria> pageNota = mercadoriaRepository.findAll(MercadoriaSpecification.searchMercadoria(filtro), pageable);
 		return new PageImpl<MercadoriaJson>(mercadoriaMapper.fromMercadoria(pageNota.getContent()), pageable, pageNota.getTotalElements());
 	}
 	
@@ -53,12 +53,6 @@ public class MercadoriaController extends AbstractController{
 	@GetMapping(value = "/search/{name}")
 	public List<MercadoriaJson> searchNomeOrCodigo( @PathVariable final String name ) {
 		return mercadoriaMapper.fromMercadoria(mercadoriaRepository.findByCodigoSistemaOrDescricaoIgnoreCaseContaining(name));
-	}
-
-	@GetMapping
-	public List<MercadoriaJson> listAll() {
-		List<MercadoriaMock> pageNota = mercadoriaRepository.findAll();
-		return mercadoriaMapper.fromMercadoria(pageNota);
 	}
 
 	@ResponseStatus( value = HttpStatus.CREATED )

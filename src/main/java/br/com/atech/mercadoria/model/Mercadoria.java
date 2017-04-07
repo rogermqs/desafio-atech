@@ -9,10 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import br.com.atech.notafiscal.model.ObjectConsumer;
 
 
 @Entity
+@Where( clause = "ativo = true" )
+@SQLDelete(sql = "update Mercadoria set ativo = false where id = ?")
 @Table( name = "MERCADORIA" )
 @SequenceGenerator( sequenceName = "SEQ_MERCADORIA", name = "SEQ_MERCADORIA", allocationSize = 1 )
 public class Mercadoria implements ObjectConsumer{

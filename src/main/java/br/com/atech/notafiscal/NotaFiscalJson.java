@@ -10,8 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.atech.mercadoria.model.Mercadoria;
-import br.com.atech.mercadoria.model.MercadoriaMock;
-import br.com.atech.notafiscal.emitente.model.EmitenteMock;
+import br.com.atech.notafiscal.emitente.model.Emitente;
 
 
 public class NotaFiscalJson implements Serializable{
@@ -26,7 +25,7 @@ public class NotaFiscalJson implements Serializable{
 	
 	
 	@NotNull
-	private EmitenteMock emitente;
+	private Emitente emitente;
 	
 	
 	@NotEmpty
@@ -41,6 +40,9 @@ public class NotaFiscalJson implements Serializable{
 	
 	@NotNull
 	private BigDecimal valorTotal;
+	
+	
+	private boolean ativo = true;
 
 	public Long getId() {
 		return id;
@@ -50,11 +52,11 @@ public class NotaFiscalJson implements Serializable{
 		this.id = id;
 	}
 
-	public EmitenteMock getEmitente() {
+	public Emitente getEmitente() {
 		return emitente;
 	}
 
-	public void setEmitente(EmitenteMock emitente) {
+	public void setEmitente(Emitente emitente) {
 		this.emitente = emitente;
 	}
 
@@ -88,6 +90,14 @@ public class NotaFiscalJson implements Serializable{
 
 	public void setValorTotal(BigDecimal valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }

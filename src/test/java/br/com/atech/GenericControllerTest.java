@@ -55,7 +55,7 @@ public class GenericControllerTest<T> {
 					.header("gri_user", "ercarval").accept(MediaType.APPLICATION_JSON_VALUE))
 					.andExpect(status().isOk()).andReturn();
 			responseContent = mvcResult.getResponse().getContentAsString();
-			Assert.assertTrue(jsonMapper.readValue(responseContent, List.class).size() > 0);
+			Assert.assertNotNull(jsonMapper.readValue(responseContent, this.classParameter));
 		}
 		catch (final Exception e) {
 			e.printStackTrace();
@@ -160,6 +160,29 @@ public class GenericControllerTest<T> {
 
 			final HttpStatus status = HttpStatus.valueOf(mvcResult.getResponse().getStatus());
 			assertEquals(HttpStatus.CREATED, status);
+
+		} catch (final Exception exception) {
+			exception.printStackTrace();
+			Assert.fail();
+		}
+	}
+	
+	protected void createReturnCreateBadRequest(final T expectedReturn) {
+
+		try {
+			final Writer responseJson = new StringWriter();
+			jsonMapper.writeValue(responseJson, expectedReturn);
+
+			final MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+					.post(endPoint)
+					.header("Content-Type", "application/json")
+					.content(responseJson.toString().getBytes())
+					.accept(MediaType.APPLICATION_JSON_VALUE))
+					.andExpect(status().isBadRequest())
+					.andReturn();
+
+			final HttpStatus status = HttpStatus.valueOf(mvcResult.getResponse().getStatus());
+			assertEquals(HttpStatus.BAD_REQUEST, status);
 
 		} catch (final Exception exception) {
 			exception.printStackTrace();

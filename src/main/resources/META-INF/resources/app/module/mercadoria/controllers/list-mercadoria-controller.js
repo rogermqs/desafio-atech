@@ -22,7 +22,7 @@ app.controller('ListMercadoriaController', ['$scope', '$rootScope', '$timeout', 
        vm.success =  function(response) {
         	vm.products = response.data.content;
         	vm.query.total = response.data.totalElements;
-            if(vm.royalties.length === 0){
+            if(vm.products.length === 0){
                 NotificationService.send('No produts found!');
             }
           }
@@ -53,10 +53,10 @@ app.controller('ListMercadoriaController', ['$scope', '$rootScope', '$timeout', 
         };
         
         vm.edited = function(idMercadoria){
-        	 $location.path("form-mercadoria/" + idMercadoria);
+        	 $location.path("mercadoria/" + idMercadoria);
         };
         
-        vm.remove = function(idRoyalty){
+        vm.remove = function(idMercadoria){
         	ApiService.delete("rest/mercadoria/"+idMercadoria)
         	.then(
     	        function (data) {

@@ -20,7 +20,7 @@ public class MercadoriaSpecification {
 			@Override
 			public Predicate toPredicate(Root<Mercadoria> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
-				MercadoriaSqlBuilder mercadoriaSqlBuilder = new MercadoriaSqlBuilder(filtro, cb, root, query);
+				MercadoriaSqlBuilder mercadoriaSqlBuilder = new MercadoriaSqlBuilder(filtro, cb, root);
 				List<Predicate> predicates = mercadoriaSqlBuilder.searchCodigo()
 																 .searchNome()
 																 .searchPreco()

@@ -1,8 +1,4 @@
-/*
- * Copyright (c) 2016, Embraer. All rights reserved. Embraer S/A proprietary/confidential. Use is subject to license terms.
- */
-
-package br.com.atech;
+package br.com.atech.config;
 
 
 import org.springframework.amqp.core.AmqpAdmin;

@@ -8,7 +8,6 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import br.com.atech.notafiscal.emitente.model.Emitente;
-import br.com.atech.notafiscal.emitente.model.EmitenteMock;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface EmitenteMapper {
@@ -16,12 +15,12 @@ public interface EmitenteMapper {
 	
 	EmitenteMapper MAPPER = Mappers.getMapper(EmitenteMapper.class);
 	
-	EmitenteMock toEmitente(EmitenteJson emitenteJson);
+	Emitente toEmitente(EmitenteJson emitenteJson);
 	
 	List<Emitente> toEmitente(List<EmitenteJson> emitenteJson);
 	
 	@InheritInverseConfiguration
-	EmitenteJson fromEmitente(Emitente royalty);
+	EmitenteJson fromEmitente(Emitente emitente);
 	
 	@InheritInverseConfiguration
 	List<EmitenteJson> fromEmitente(List<Emitente> emitente);

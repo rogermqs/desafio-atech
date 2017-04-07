@@ -14,13 +14,13 @@ import br.com.atech.notafiscal.FiltroNotaFiscal;
 public class NotaFiscalSpecification {
 	
 	
-	public static Specification<NotaFiscalMock> searchNotaFiscal(final FiltroNotaFiscal filtro)  {
+	public static Specification<NotaFiscal> searchNotaFiscal(final FiltroNotaFiscal filtro)  {
 
-		return new Specification<NotaFiscalMock>() {
+		return new Specification<NotaFiscal>() {
 			@Override
-			public Predicate toPredicate(Root<NotaFiscalMock> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+			public Predicate toPredicate(Root<NotaFiscal> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
-				NotaFiscalSqlBuilder notaFiscalSqlBuilder = new NotaFiscalSqlBuilder(filtro, cb, root, query);
+				NotaFiscalSqlBuilder notaFiscalSqlBuilder = new NotaFiscalSqlBuilder(filtro, cb, root);
 				List<Predicate> predicates = notaFiscalSqlBuilder.searchByEmitente()
 																 .searchByMercadoria()
 																 .build();

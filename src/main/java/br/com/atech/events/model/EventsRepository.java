@@ -23,7 +23,7 @@ public interface EventsRepository extends JpaRepository<Events, Long>, JpaSpecif
 	
 	@Modifying
 	@Transactional
-	@Query( "UPDATE Events e  SET e.statusEvent = 'READ' where e.id = :idEvent")
-	void readEvent( @Param( "idEvent" ) Long idEvent );
+	@Query( "UPDATE Events e  SET e.statusEvent = 'READ' where e.id in (:idsEvent)")
+	void readEvent( @Param( "idsEvent" ) List<Long> idsEvent );
 	
 }

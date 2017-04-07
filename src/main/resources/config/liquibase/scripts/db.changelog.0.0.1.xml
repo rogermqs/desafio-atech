@@ -106,6 +106,10 @@
                 <constraints nullable="true"/>
             </column>
             
+            <column name="ativo" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            
         </createTable>
 
         <addForeignKeyConstraint baseTableName="NOTA_FISCAL" baseColumnNames="emitente_id" constraintName="FK_NOTA_EMITENTE" referencedTableName="emitente"
