@@ -1,0 +1,78 @@
+<div layout="row">
+    <div flex="10"></div>
+    <div flex="80">
+        <md-card>
+            <md-card-header>
+                <md-card-avatar>
+                    <i class="material-icons">find_in_page</i>
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title">Search Invoice</span>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-content>
+                <!--formulário de pesquisa-->
+                <md-content class="md-padding">
+                	
+                	<div layout-gt-xs="row">
+	                    <md-input-container flex="50">
+	                        <label>Emitente</label>
+	                        <md-select ng-model="vm.filter.idEmitente" name="filter.idEmitente" placeholder="Emitente">
+	                           <md-option value=''></md-option>
+                               <md-option ng-value="emitente.id" ng-repeat="emitente in vm.emitentes">{{ emitente.nome }}</md-option>
+                   		</md-select>
+	                    </md-input-container>
+                        <md-input-container flex="50">
+                            <label>Product</label>
+                            <md-select ng-model="vm.filter.idMercadoria" name="filter.idMercadoria" placeholder="Mercadoria">
+                            	<md-option value=''></md-option>
+	                     		<md-option ng-value="mercadoria.id" ng-repeat="mercadoria in vm.listMercadorias">{{ mercadoria.nome }}</md-option>
+	                     	</md-select>
+                        </md-input-container>
+                     </div>
+                     
+                    <md-button class="md-raised md-default" ng-click="vm.limpar();">Limpar</md-button>
+                    <md-button class="md-raised md-primary" ng-click="vm.pesquisar();">Pesquisar</md-button>
+                </md-content>
+            </md-card-content>
+        </md-card>
+		<!--listagem-->
+		<md-toolbar class="md-table-toolbar alternate" ng-show="selected.length > 0">
+		<div class="md-toolbar-tools">
+		    <span>Item selecionado: {{selected[0].nroNota}}</span>
+		    <span flex></span>
+		    <md-button class="md-icon-button" ng-click="vm.edited(selected[0].id);" aria-label="Edit Invoice">
+		    	<md-icon md-svg-icon="content/images/icons/edit.svg"></md-icon>
+		    </md-button>
+		    <md-button class="md-icon-button" ng-click="vm.remove(selected[0].id);" aria-label="Delete Invoice">
+		    	<md-icon md-svg-icon="content/images/icons/delete.svg"></md-icon>
+		    </md-button>
+		</div>
+		</md-toolbar>
+		<md-content class="md-padding">
+			<md-table-container>
+			  <table md-table md-row-select ng-model="selected" md-progress="promise">
+			    <thead md-head md-order="vm.query.order" md-on-reorder="vm.order">
+			      <tr md-row>
+			      	<th md-column md-order-by="nroNota"><span>Number Invoice</span></th>
+			      	<th md-column><span>Emitente</span></th>
+			      	<th md-column><span>Date</span></th>
+			        <th md-column><span>Valor Total</span></th>
+			      </tr>
+			    </thead>
+			    <tbody md-body>
+			      <tr md-row md-select="nota" md-select-id="name" md-auto-select ng-repeat="nota in vm.notas">
+			      	<td md-cell>{{::nota.nroNota}}</td>
+			        <td md-cell>{{::nota.emitente.nome}}</td>
+			        <td md-cell>{{::nota.dataEmissao | date:'dd-MM-yyyy'}}</td>
+			        <td md-cell>{{::nota.valorTotal | number:2}}</td>
+			        </td>
+			      </tr>
+			    </tbody>
+			  </table>
+			</md-table-container>
+		</md-content>
+		<md-table-pagination md-limit="vm.query.limit" md-limit-options="[10, 20, 30, 40]" md-page="vm.query.page" md-total="{{vm.query.total}}" md-on-paginate="vm.onPaginate" md-page-select></md-table-pagination>
+    </div>
+    <div flex="10"></div>
+</div>

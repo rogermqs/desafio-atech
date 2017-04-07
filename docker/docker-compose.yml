@@ -1,0 +1,10 @@
+postgres:
+  image: postgres:9.6.1-alpine
+  ports:
+    - "5432:5432"
+  environment:
+    - POSTGRES_PASSWORD=proimport
+    - POSTGRES_DB=proimport
+    - POSTGRES_USER=proimport
+  volumes:
+    - /var/lib/postgresql

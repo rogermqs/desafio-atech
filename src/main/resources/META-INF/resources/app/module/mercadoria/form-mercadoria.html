@@ -1,0 +1,41 @@
+<style>
+md-list-item:hover{
+background-color: #e8e8e8;
+}
+</style>
+  <div layout="row">
+    <div flex="10"></div>
+    <div flex="80">
+    <md-card>
+        <md-card-header>
+            <md-card-avatar>
+                <i class="material-icons">note_add</i>
+            </md-card-avatar>
+            <md-card-header-text>
+                <span class="md-title">Products</span>
+            </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+            <form name="form" id="form" ng-submit="vm.salvar();" novalidate>
+                <md-content>
+                     <md-content class="md-padding">
+                		<md-input-container class="md-block" flex="50">
+                             <input ng-model="vm.form.nome" name="nome" type="text" placeholder="Name" ng-required="true">
+                         </md-input-container>
+                          <md-input-container class="md-block" flex="30">
+                              <input ng-model="vm.form.codigo" name="codigo" placeholder="Code" ng-required="true">
+                          </md-input-container>
+                          <md-input-container class="md-block" flex="30">
+                              <input type="number" ng-model="vm.form.preco" name="preco" placeholder="Price" ng-required="true">
+                          </md-input-container>
+                     </md-content>
+                    <md-button type="submit" class="md-raised md-primary">Salvar</md-button>
+               </md-content>
+            </form>
+        </md-card-content>
+    </md-card>
+
+    </div>
+    <div flex="10"></div>
+
+  </div>

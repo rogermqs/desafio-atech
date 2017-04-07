@@ -1,0 +1,27 @@
+.listHeaderMenu md-divider {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.listHeaderMenu md-list {
+    padding-top: 0;
+}
+.listHeaderMenu md-list-item span{
+    margin-left: 8px !important;
+}
+.listHeaderMenu md-subheader i{
+    padding-top: 15px !important;
+}
+.listHeaderMenu md-list-item>p,
+.listHeaderMenu md-list-item>.md-list-item-inner>p,
+.listHeaderMenu md-list-item .md-list-item-inner>p,
+.listHeaderMenu md-list-item .md-list-item-inner>.md-list-item-inner>p {
+    -webkit-user-select: none;
+    /* Chrome all / Safari all */
+    -moz-user-select: none;
+    /* Firefox all */
+    -ms-user-select: none;
+    /* IE 10+ */
+    user-select: none;
+    /* Likely future */
+}

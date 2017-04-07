@@ -1,0 +1,71 @@
+<div layout="row">
+    <div flex="10"></div>
+    <div flex="80">
+        <md-card>
+            <md-card-header>
+                <md-card-avatar>
+                    <i class="material-icons">find_in_page</i>
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title">Search Products</span>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-content>
+                <!--formulário de pesquisa-->
+                <md-content class="md-padding">
+                     <div layout-gt-xs="row">
+                        <md-input-container flex="50">
+                            <label>Description</label>
+                            <input ng-model="vm.form.nome" name="nome" type="text" placeholder="Description">
+                        </md-input-container>
+                        <md-input-container flex="25">
+                            <label>Code</label>
+                            <input ng-model="vm.form.codigo" name=codigo placeholder="Code">
+                        </md-input-container>
+                        <md-input-container flex="25">
+                            <label>Price</label>
+                            <input ng-model="vm.form.preco" name=preco placeholder="Price">
+                        </md-input-container>
+                      </div>
+                    <md-button class="md-raised md-default" ng-click="vm.limpar();">Limpar</md-button>
+                    <md-button class="md-raised md-primary" ng-click="vm.pesquisar();">Pesquisar</md-button>
+                </md-content>
+            </md-card-content>
+        </md-card>
+		<!--listagem-->
+		<md-toolbar class="md-table-toolbar alternate" ng-show="selected.length > 0">
+		<div class="md-toolbar-tools">
+		    <span>Item selecionado: {{selected[0].nome}}</span>
+		    <span flex></span>
+		    <md-button class="md-icon-button" ng-click="vm.edited(selected[0].id);" aria-label="Edit Product">
+		    	<md-icon md-svg-icon="content/images/icons/edit.svg"></md-icon>
+		    </md-button>
+		    <md-button class="md-icon-button" ng-click="vm.remove(selected[0].id);" aria-label="Delete Product">
+		    	<md-icon md-svg-icon="content/images/icons/delete.svg"></md-icon>
+		    </md-button>
+		</div>
+		</md-toolbar>
+		<md-content class="md-padding">
+			<md-table-container>
+			  <table md-table md-row-select ng-model="selected" md-progress="promise">
+			    <thead md-head md-order="vm.query.order" md-on-reorder="vm.order">
+			      <tr md-row>
+			        <th md-column md-order-by="nome"><span>Description</span></th>
+			        <th md-column md-numeric><span>Code</span></th>
+			        <th md-column md-numeric><span>Price</span></th>
+			      </tr>
+			    </thead>
+			    <tbody md-body>
+			      <tr md-row md-select="product" md-select-id="name" md-auto-select ng-repeat="product in vm.products">
+			        <td md-cell>{{::product.nome}}</td>
+			        <td md-cell>{{::product.codigo}}</td>
+			        <td md-cell>{{::product.preco | number:2}} %</td>
+			      </tr>
+			    </tbody>
+			  </table>
+			</md-table-container>
+		</md-content>
+		<md-table-pagination md-limit="vm.query.limit" md-limit-options="[10, 20, 30, 40]" md-page="vm.query.page" md-total="{{vm.query.total}}" md-on-paginate="vm.onPaginate" md-page-select></md-table-pagination>
+    </div>
+    <div flex="10"></div>
+</div>

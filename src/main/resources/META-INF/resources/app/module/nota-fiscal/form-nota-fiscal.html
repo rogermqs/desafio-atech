@@ -1,0 +1,84 @@
+<style>
+md-list-item:hover{
+background-color: #e8e8e8;
+}
+</style>
+  <div layout="row">
+    <div flex="10"></div>
+    <div flex="80">
+    <md-card>
+        <md-card-header>
+            <md-card-avatar>
+                <i class="material-icons">note_add</i>
+            </md-card-avatar>
+            <md-card-header-text>
+                <span class="md-title">Nova Nota Fiscal</span>
+            </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+            <form name="form" id="form" ng-submit="vm.salvar();">
+                <md-content class="md-padding">
+                   	<div layout-gt-xs="row">
+                         <md-input-container class="md-block" flex="60">
+                   			<md-select ng-model="vm.notaFiscal.emitente" name="notaFiscal.emitente" placeholder="Emitente" ng-required="true">
+                           		<md-option ng-value="emitente" ng-repeat="emitente in vm.emitentes track by emitente.id">{{ emitente.nome }}</md-option>
+               				</md-select>
+               			</md-input-container>
+               			<md-input-container class="md-block" flex="20">
+                           <input ng-model="vm.notaFiscal.nroNota" name="notaFiscal.nroNota"  type="number" maxlength="5" max="99999" placeholder="Number Invoice">
+               			</md-input-container>
+           			</div>
+           			
+       				<div layout-gt-xs="row">
+       					<md-input-container>
+                            <label>Emission Date</label>
+                            <md-datepicker ng-model="vm.notaFiscal.dataEmissao"></md-datepicker>
+                        </md-input-container>
+       				</div>
+                    <div layout="row" style="background-color:#e2e2e2; padding-left: 10px; padding-top: 10px;">
+                         <h4 style="margin-right: 20px;">Search Products:</h4>
+                         <md-input-container flex="33">
+                             <input ng-model="vm.pesquisa.mercadoria" name="mercadoria" type="text" placeholder="Code or Name">
+                         </md-input-container>
+                         <md-button type="button" class="md-raised md-primary" style="height: 30px; margin-top: 15px" ng-click="vm.buscarMercadorias();">Buscar</md-button>
+                     </div>
+                     <div layout="row">
+                         <md-list flex="50">
+                             <md-subheader class="md-no-sticky">Products Found ({{vm.listaMercadorias.length}}):</md-subheader>
+                             <div style="overflow-y: scroll; height: 400px;">
+                             <md-list-item class="md-2-line" ng-repeat="item in vm.listaMercadorias">
+                                 <div class="md-list-item-text" layout="column">
+                                     <h3> {{item.codigo}} - {{item.nome}} </h3>
+                                     <p> {{item.preco | currency:"R$ "}} </p>
+                                 </div>
+                                 <md-button type="button" class="md-secondary md-icon-button" ng-click="vm.addMercadoria(item)" ng-disabled="item.use" aria-label="Selecionar">
+                                     <i class="material-icons">add_circle</i>
+                                 </md-button>
+                             </md-list-item>
+                             </div>
+                         </md-list>
+                         <md-list flex="50">
+                             <md-subheader class="md-no-sticky" style="background-color:#64a2d8; color:#ffffff; ">Products Selected ({{vm.notaFiscal.mercadorias.length}}):</md-subheader>
+                             <div style="overflow-y: scroll; height: 400px;">
+                             <md-list-item class="md-2-line" ng-repeat="item in vm.notaFiscal.mercadorias">
+                                 <div class="md-list-item-text" layout="column">
+                                     <h3> {{item.codigo}} - {{item.nome}} </h3>
+                                     <p> {{item.preco | currency:"R$ "}} </p>
+                                 </div>
+                                 <md-button type="button" class="md-secondary md-icon-button" ng-click="vm.removerMercadoria(item)" aria-label="Selecionar">
+                                     <i class="material-icons">clear</i>
+                                 </md-button>
+                             </md-list-item>
+                             </div>
+                         </md-list>
+                     </div>
+                     <md-button type="button" class="md-raised md-default" ng-click="vm.selectedTab = 0;">Voltar</md-button>
+                     <md-button type="submit" class="md-raised md-primary">Salvar</md-button>
+                   </md-content>
+            </form>
+        </md-card-content>
+    </md-card>
+    </div>
+    <div flex="10"></div>
+
+  </div>

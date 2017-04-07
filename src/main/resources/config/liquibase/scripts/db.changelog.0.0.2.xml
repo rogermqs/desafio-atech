@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="roger" id="5">
+    	<createSequence sequenceName="SEQ_MERCADORIA" startValue="1" incrementBy="1" />
+    	<rollback>
+            <dropSequence sequenceName="SEQ_MERCADORIA"/>
+        </rollback>
+        
+        <createSequence sequenceName="SEQ_NOTA_FISCAL" startValue="1" incrementBy="1" />
+    	<rollback>
+            <dropSequence sequenceName="SEQ_NOTA_FISCAL"/>
+        </rollback>
+        
+        <createSequence sequenceName="SEQ_EMITENTE" startValue="1" incrementBy="1" />
+    	<rollback>
+            <dropSequence sequenceName="SEQ_EMITENTE"/>
+        </rollback>
+   	</changeSet>
+   	
+   	
+   	
+   	<changeSet author="roger" id="6">
+    	<createSequence sequenceName="SEQ_EVENTS" startValue="1" incrementBy="1" />
+    	<rollback>
+            <dropSequence sequenceName="SEQ_EVENTS"/>
+        </rollback>
+        
+        
+        <createTable tableName="EVENTS" >
+
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+
+           <column name="type_Events" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status_Event" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="message" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="EVENTS"/>
+        </rollback>
+        
+        
+   	</changeSet>
+   	
+   	
+
+</databaseChangeLog>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="roger" id="1">
+        <createTable tableName="mercadoria" >
+
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="ativo" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            
+           <column name="codigo" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="nome" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="preco" type="decimal(19,2)">
+                <constraints nullable="true"/>
+            </column>
+
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="mercadoria"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="roger" id="2">
+        <createTable tableName="emitente" >
+
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="ativo" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="nome" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="documento" type="VARCHAR(50)">
+                <constraints nullable="true"/>
+            </column>
+
+        </createTable>
+        
+        <insert tableName="emitente">
+    		<column name="id" value="1" />
+    		<column name="ativo" value="true" />
+    		<column name="nome" value="Emitente 1" />
+    		<column name="documento" value="111.111.111-11" />
+		</insert>
+		
+		<insert tableName="emitente">
+    		<column name="id" value="2" />
+    		<column name="ativo" value="true" />
+    		<column name="nome" value="Emitente 2" />
+    		<column name="documento" value="222.222.222-22" />
+		</insert>
+		
+		
+		<insert tableName="emitente">
+    		<column name="id" value="3" />
+    		<column name="ativo" value="true" />
+    		<column name="nome" value="Emitente 3" />
+    		<column name="documento" value="333.333.333-33" />
+		</insert>
+
+        <rollback>
+            <dropTable tableName="emitente"/>
+        </rollback>
+    </changeSet>
+    
+    <changeSet id="3" author="roger">
+        <createTable tableName="NOTA_FISCAL">
+        	
+        	<column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+            
+            <column name="emitente_id" type="BIGSERIAL">
+                <constraints nullable="true"/>
+            </column>
+            
+            <column name="valor_total" type="decimal(19,2)">
+                <constraints nullable="true"/>
+            </column>
+            
+            <column name="nro_nota" type="BIGSERIAL">
+                <constraints nullable="true"/>
+            </column>
+            
+            <column name="data_emissao" type="DATE">
+                <constraints nullable="true"/>
+            </column>
+            
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="NOTA_FISCAL" baseColumnNames="emitente_id" constraintName="FK_NOTA_EMITENTE" referencedTableName="emitente"
+            referencedColumnNames="id" />
+        <rollback>
+            <dropTable tableName="NOTA_FISCAL" />
+        </rollback>
+    </changeSet>
+
+
+    <changeSet id="4" author="roger">
+        <createTable tableName="NOTA_MERCADORIA">
+            <column name="nota_id" type="BIGSERIAL" />
+            <column name="mercadoria_id" type="BIGSERIAL" />
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="NOTA_MERCADORIA" baseColumnNames="nota_id" constraintName="FK_NOTA_MERC_NOTA" referencedTableName="NOTA_FISCAL"
+            referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="NOTA_MERCADORIA" baseColumnNames="mercadoria_id" constraintName="FK_NOTA_MERC_MERC" referencedTableName="MERCADORIA"
+            referencedColumnNames="id" />
+
+        <rollback>
+            <dropTable tableName="NOTA_MERCADORIA" />
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

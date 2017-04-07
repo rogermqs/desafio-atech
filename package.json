@@ -1,0 +1,16 @@
+{
+    "name": "atechppApp",
+    "version": "0.0.1",
+    "description": "Atech App",
+    "private": true,
+    "cacheDirectories": [
+        "node_modules",
+        "src/main/resources/META-INF/resources"
+    ],
+    "devDependencies": {
+        "bower": "1.7.9"
+    },
+    "engines": {
+        "node": "^4.3"
+    }
+}

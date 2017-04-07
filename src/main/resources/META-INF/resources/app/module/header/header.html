@@ -1,0 +1,67 @@
+<div  ng-controller="HeaderController as vm">
+  <md-content >
+      <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools" style="overflow: hidden;">
+          <md-button ng-click="vm.toggleLeft()" class="md-icon-button" aria-label="Menu">
+            <md-icon md-svg-icon="content/images/icons/menu.svg"></md-icon>
+          </md-button>
+          <h2 style="background-color: #FFF !important; margin-top: -10px; padding: 30px 10px 18px 10px;">
+            <img src="content/images/logo-atech.gif" height="50px" />
+            <span>Desafio Atech</span>
+          </h2>
+          <span flex></span>
+
+          <md-menu md-offset="0 -7">
+            <md-button aria-label="Notificações" class="md-icon-button" ng-click="vm.loadNotification();$mdOpenMenu($event)">
+              <md-icon md-svg-icon="content/images/icons/message.svg"></md-icon>
+            </md-button>
+            <md-menu-content width="4">
+              <md-menu-item ng-repeat="item in vm.listNotification">
+                <span md-menu-align-target style="font-size: 10px;">{{item.text}}  <hr /></span>
+
+              </md-menu-item>
+
+            </md-menu-content>
+          </md-menu>
+
+          <md-button class="md-icon-button" aria-label="Administrador">
+            <md-icon md-svg-icon="content/images/icons/more_vert.svg"></md-icon>            
+          </md-button>
+        </div>
+      </md-toolbar>
+    </md-content>
+    <section layout="row" flex>
+
+        <md-sidenav class="md-sidenav-left" md-component-id="left"
+                    md-disable-backdrop md-whiteframe="4">
+
+          <md-toolbar class="md-theme-indigo" ng-click="vm.toggleLeft()" style="cursor: pointer;">
+            <h1 class="md-toolbar-tools"><i class="material-icons">arrow_back</i> Menu :: </h1>
+          </md-toolbar>
+          <md-content layout-margin class="listHeaderMenu">
+              <md-list flex style="width:100%!important; margin: 0px!important;">
+              
+              	<md-subheader class="md-no-sticky">Product</md-subheader>
+                <md-list-item ng-click="vm.openPage('/mercadoria');">                
+                    <i class="material-icons">note_add</i><span>New Product</span>                
+                </md-list-item>
+                <md-divider ></md-divider>
+                <md-list-item ng-click="vm.openPage('/list-mercadoria');">
+                  <i class="material-icons">find_in_page</i><span>Search Products</span>
+                </md-list-item>
+                <md-divider ></md-divider>
+                <md-subheader class="md-no-sticky">Invoice</md-subheader>
+                <md-list-item ng-click="vm.openPage('/nota-fiscal');">
+                  <i class="material-icons">update</i><span>New Invoice</span>
+                </md-list-item>
+                <md-divider ></md-divider>                
+                <md-list-item ng-click="vm.openPage('/list-nota-fiscal');">
+                  <i class="material-icons">date_range</i><span>Search Invoice </span>
+                </md-list-item>
+              </md-list>
+          </md-content>
+
+        </md-sidenav>
+
+      </section>
+</div>
