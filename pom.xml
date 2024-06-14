@@ -23,7 +23,7 @@
     <properties>
         <build.profile.id>local</build.profile.id>
         <frontend-maven-plugin.version>1.2</frontend-maven-plugin.version>
-        <commons-lang.version>3.4</commons-lang.version>
+        <commons-lang.version>3.14.0</commons-lang.version>
         <hibernate.version>5.2.4.Final</hibernate.version>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
